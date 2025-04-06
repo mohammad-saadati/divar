@@ -1,22 +1,22 @@
-const swagerJsDoc = require("swagger-jsdoc");
-const swagerUi = require("swagger-ui-express");
+const swaggerJsDoc = require("swagger-jsdoc");
+const swaggerUi = require("swagger-ui-express");
 
-const swagerDocument = swagerJsDoc({
-  swaggerDefinition: {
-    info: {
-      title: "Divar API",
-      version: "1.0.0",
-      description: "Divar API",
+function swaggerConfig(app) {
+  const swaggerDocument = swaggerJsDoc({
+    swaggerDefinition: {
+      openapi: "3.0.1",
+      info: {
+        title: "Divar API",
+        version: "1.0.0",
+        description: "Divar API",
+      },
     },
-  },
-  apis: [],
-});
-
-function swagerConfig(app) {
-  const config = swagerUi.setup(swagerDocument, {
+    apis: [process.cwd() + "/src/modules/**/*.swagger.js"],
+  });
+  const config = swaggerUi.setup(swaggerDocument, {
     explorer: true,
   });
-  app.use("/api-docs", swagerUi.serve, config);
+  app.use("/api-docs", swaggerUi.serve, config);
 }
 
-module.exports = swagerConfig;
+module.exports = swaggerConfig;

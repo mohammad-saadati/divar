@@ -10,21 +10,26 @@ class AuthController {
     autoBind(this);
   }
 
-  async sendOTP(res, req, next) {
+  async sendOTP(req, res, next) {
     try {
-      const { mobile } = req.mobile;
+      const { mobile } = req.body;
       await this.#service.sendOTP(mobile);
-      return {
+      return res.json({
         message: AuthMessages.SEND_OTP_SUCCESS,
-      };
+      });
     } catch (error) {
       next(error);
     }
   }
-  async checkOTP(res, req, next) {
-    this.sendOTP();
-    return;
+  async checkOTP(req, res, next) {
     try {
+      const { mobile, code } = req.body;
+      const accessToken = await this.#service.checkOTP(mobile, code);
+
+      return res.json({
+        message: AuthMessages.LOGIN_SUCCESS,
+        token: accessToken,
+      });
     } catch (error) {
       next(error);
     }
