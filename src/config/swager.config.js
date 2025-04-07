@@ -13,9 +13,7 @@ function swaggerConfig(app) {
     },
     apis: [process.cwd() + "/src/modules/**/*.swagger.js"],
   });
-  const config = swaggerUi.setup(swaggerDocument, {
-    explorer: true,
-  });
+  const config = swaggerUi.setup(swaggerDocument, {});
   app.use("/api-docs", swaggerUi.serve, config);
 }
 
