@@ -2,6 +2,7 @@ const authService = require("./auth.service");
 const autoBind = require("auto-bind");
 const { AuthMessages } = require("./auth.messages");
 const NodeEnv = require("../../common/constant/env.enum");
+const CookieNames = require("../../common/constant/cookie.enum");
 
 class AuthController {
   #service;
@@ -38,6 +39,16 @@ class AuthController {
           message: AuthMessages.LOGIN_SUCCESS,
           token: accessToken,
         });
+    } catch (error) {
+      next(error);
+    }
+  }
+  async logout(req, res, next) {
+    try {
+      return res
+        .clearCookie(CookieNames.ACCESSTOKEN)
+        .status(200)
+        .json({ message: AuthMessages.LOGOUT_SUCCESSFULLY });
     } catch (error) {
       next(error);
     }

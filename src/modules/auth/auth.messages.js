@@ -10,6 +10,7 @@ const AuthMessages = {
   OTP_CODE_NEXPIRED: "OTP code expired",
   LOGIN_SUCCESS: "Login success",
   UNAUTHORIZED: "Unauthorized",
+  LOGOUT_SUCCESSFULLY: "Logged out successfully",
 };
 
 module.exports = { AuthMessages };

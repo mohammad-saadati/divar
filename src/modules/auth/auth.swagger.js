@@ -68,3 +68,15 @@
  *       '200':
  *         description: Success
  */
+
+/**
+ * @swagger
+ * /auth/logout:
+ *   post:
+ *     summary: Logout
+ *     tags:
+ *       - Auth
+ *     responses:
+ *       '200':
+ *         description: Success
+ */
